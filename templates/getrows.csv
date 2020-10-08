@@ -1,0 +1,3 @@
+{% for h in headers %}{{h}}{{"," if not loop.last}}{% endfor %}
+{% for row in rows %}{% for item in row %}{{ item }}{{"," if not loop.last}}{% endfor %}
+{% endfor %}

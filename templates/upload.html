@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+{% block content %}
+
+
+
+<nav>
+    <div class="nav-wrapper row blue" id="nav">
+        <div class="col s10 nav">
+            <a href="index.html" class="breadcrumb">
+                <i class="material-icons left medium">home</i>
+                Index
+            </a>
+        </div>
+        <div class="col s2 right">
+            <a href="upload.html">
+                <i class="material-icons left medium">cloud_upload</i>
+                Upload
+            </a>
+        </div>
+    </div>
+</nav>
+
+<div class="container">
+<br>
+
+{% if confirm %}
+<div class="row">
+    <div class="col s12">
+        <p class="flow-text center grey-text text-darken-2">Upload was successful.  <a class="btn blue" href="index.html">Click Here to Return</a> </p>
+    </div>
+</div>
+{% else %}
+
+    <form method="POST" action="{{url_for('uploadSQL')}}" name="uploadSQL" enctype="multipart/form-data">
+        <div class="row">
+            <div class="col s12">
+                <label for="filename">SQL File to Upload</label>
+                <input type="file" id="filename" name="filename">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col s12">
+                <p class="flow-text center">Be sure the file has a descriptive name.
+                    Yes, it is a security issue to upload arbitrary files to a server -- PLEASE DON'T ABUSE THIS FUNCTION.
+                </p>
+            </div>
+        </div>
+        <div class="row"><div class="col s12"><input type="submit" class="btn blue"></div></div>
+    </form>
+
+{% endif %}
+</div>
+{% endblock %}

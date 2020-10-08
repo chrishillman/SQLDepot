@@ -1,0 +1,81 @@
+{% extends "base.html" %}
+{% block content %}
+
+<script>
+$(document).ready(function(){
+
+$("#rowstable").tablesorter();
+$(".tooltip").tooltip();
+document.getElementById("newquery").value = document.getElementById("query").value;
+
+$('#query').change(function(){
+    document.getElementById("newquery").value = document.getElementById("query").value;
+});
+
+document.getElementById("saveassubmit").value = "Save as " + document.getElementById('newfilename').value;
+$('#newfilename').change( function(){
+    document.getElementById("saveassubmit").value = "Save as " + document.getElementById('newfilename').value;
+});
+
+    });
+
+</script>
+
+
+<nav>
+    <div class="nav-wrapper row blue" id="nav">
+        <div class="col s10 nav">
+            <a href="index.html" class="breadcrumb">
+                <i class="material-icons left medium">home</i>
+                Index
+            </a>
+        </div>
+        <div class="col s2 right">
+            <a href="upload.html">
+                <i class="material-icons left medium">cloud_upload</i>
+                Upload
+            </a>
+        </div>
+    </div>
+</nav>
+
+<div class="container">
+<br>
+
+<div class="row">
+    <form name="updatequery" action="{{ url_for('updatequery') }}" method="post">
+        <div class="col s12">
+            SQL: <textarea name="query" id="query"> {{sql}} </textarea>
+        </div>
+        <div class="col s12 right">
+            <input type="hidden" name="sqlfile" value="{{sqlfile}}">
+            <input type="submit" value="Update {{sqlfile}}" class="btn blue"></form>
+    <form name="saveasquery" action="{{ url_for('saveasquery') }}" method="post">
+        <input type="text" name="newfilename" value="Copy-{{sqlfile}}"class="tooltip" data-tooltip="filename must end in '.sql'!" id="newfilename">
+        <input type="hidden" name="newquery" id="newquery">
+        <input type="submit" value="Save As New" id="saveassubmit" class="btn blue"></form>
+        </div>
+</div>
+
+
+    <div class="row"><div class="col s12">
+    <table class="tablesorter" id="rowstable">
+    <thead>
+    <tr>
+    {% for h in headers %}
+    <th>{{h}}</th>
+    {% endfor %}
+    </tr>
+    </thead>
+    {% for row in rows %}
+
+    <tr>
+    {% for item in row %} <td>{{ item }}</td> {% endfor %}
+    </tr>
+
+    {% endfor %}
+    </table>
+    </div></div>
+
+</div>
+{% endblock %}

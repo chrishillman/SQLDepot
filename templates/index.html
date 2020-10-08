@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% block content %}
+
+<nav>
+    <div class="nav-wrapper row blue" id="nav">
+        <div class="col s10 nav">
+            <a href="index.html" class="breadcrumb">
+                <i class="material-icons left medium">home</i>
+                Index
+            </a>
+        </div>
+        <div class="col s2 right">
+            <a href="upload.html">
+                <i class="material-icons left medium">cloud_upload</i>
+                Upload
+            </a>
+        </div>
+    </div>
+</nav>
+
+<div class="container">
+<br>
+
+
+{% for file in sqldict %}
+<div class="row">
+    <div class="col s8">
+        <a href="getrows.html?f={{ file }}" class="btn-large waves-effect waves-light blue" style="width:100%">{{ file }}</a>
+    </div>
+
+    <div class="col s4">
+        <a href="getrows.csv?f={{ file }}" class="btn-large waves-effect waves-light orange" style="width:100%">CSV: {{ file }}</a>
+    </div>
+</div>
+{% endfor%}
+
+
+</div>
+{% endblock %}
