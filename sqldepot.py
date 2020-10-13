@@ -3,7 +3,8 @@
 
 import adodbapi as ado
 from flask import Flask, render_template, redirect, request, url_for
-import os, sys
+import os
+import sys
 
 
 #Global variables:
